@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './Trackers.css'
-import {groupBy} from '../helper'
+import {groupBy, diffTime} from '../helper'
 
 const TrackerCategory = ({category}) => {
   return (
@@ -13,12 +13,13 @@ const TrackerCategory = ({category}) => {
 }
 
 const TrackerRow = ({tracker}) => {
+  const duration = diffTime(tracker?.starttime, tracker?.endtime )
   return (
     <tr>
       <td>{tracker.name}</td>
       <td>{tracker.starttime}</td>
       <td>{tracker.endtime}</td>
-      <td>2j 3h 45min 18 sec </td>
+      <td>{duration}</td>
     </tr>
   )
 }
