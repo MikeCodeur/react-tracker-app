@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import {FilterTrackers} from './FilterTrackers'
-
+import {TrackersTable} from "./TrackersTable";
 import db from '../data'
 
 function TrackersApp() {
@@ -12,7 +12,7 @@ function TrackersApp() {
   const handleTextChange = text => {
     setFilterText(text)
     const filteredTracker = db.filter(
-      track => track.name.toLowerCase().indexOf(text) === -1,
+      track => track.name.toLowerCase().indexOf(text) !== -1,
     )
     setAllTrackers(filteredTracker)
   }
@@ -20,7 +20,7 @@ function TrackersApp() {
   return (
     <div>
       <FilterTrackers onTextChange={handleTextChange} />
-      il y a {allTrackers.length} trackers
+      <TrackersTable trackers={allTrackers} />
     </div>
   )
 }
