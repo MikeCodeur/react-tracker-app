@@ -1,6 +1,21 @@
-export * from './FilterTrackers.final'
+import * as React from 'react'
 
-//export * from './FilterTrackers.exercise'
+const FilterTrackers = ({onTextChange}) => {
+  const handleChange = e => {
+    onTextChange(e.target.value)
+  }
+  return (
+    <div className="component-search-input">
+      <h2>Recherche de Trackers</h2>
+      <div>
+        <input
+          type="text"
+          placeholder="libéllé du tracker"
+          onChange={handleChange}
+        ></input>
+      </div>
+    </div>
+  )
+}
 
-// 🚀 Utilisation de aaa
-//export * from './FilterTrackers.bonus-1'
+export {FilterTrackers}

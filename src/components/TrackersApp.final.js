@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from 'react'
 import {FilterTrackers} from './FilterTrackers'
-
+import {TrackersTable} from "./TrackersTable";
 import db from '../data'
 
 function TrackersApp() {
@@ -20,7 +20,7 @@ function TrackersApp() {
   return (
     <div>
       <FilterTrackers onTextChange={handleTextChange} />
-      il y a {allTrackers.length} trackers
+      <TrackersTable trackers={allTrackers} />
     </div>
   )
 }

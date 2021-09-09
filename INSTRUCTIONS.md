@@ -1,5 +1,5 @@
-# Filtrer les Trackers
-### 💡 Filtrer les Trackers
+# Affichage des Trackers
+### 💡 Affichage des Trackers dans un tableau
 
 ## 📝 Tes notes
 
@@ -7,13 +7,34 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Nous avons un composant enfant `FilterTrackers` qui contient un champ input qui permettra de filtrer les trackers. Nous devons faire monter au composant parent `TrackersApp` la chaine de caractère.
+Nous allons afficher les trackers dans un composant `<TrackersTable />` qui est une tableau html classique 
+
+```html
+<table>
+    <thead>
+      <tr>
+        <th>Nom du Tracker</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Durée</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>name</td>
+          <td>starttime</td>
+          <td>endtime</td>
+          <td>duree</td>
+        </tr>
+    </tbody>
+  </table>
+```
 
 ## Exercice
 
-Dans cet exercice tu vas devoir créer un composant `FilterTrackers` qui remontra la valeur saisie au parent. Il n'aura donc pas de state. On utilisera le pattern `State Hoisting`.
+Dans cet exercice tu vas devoir passer en props la liste de trackers au composant `<TrackersTable />` et ensuite afficher dynamiquement le tableau .
 
-Tu vas devoir modifier 2 composants : `FilterTrackers` et `TrackersApp` 
+> Pense à éditer `TrackersApp` pour y ajouter `TrackersTable`
 
 ## 🐜 Feedback
 
