@@ -3,18 +3,12 @@ import * as React from 'react'
 
 import db from '../data'
 
-const defaultTracker = {
-  id: "",
-  category: "default",
-  starttime: "",
-  endtime: "",
-  name: "",
-};
+
 
 function TrackersApp() {
   const [allTrackers, setAllTrackers] = React.useState(db);
   const [filterText, setFilterText] = React.useState("");
-  const [selectedTracker, setSelectedTracker] = React.useState(defaultTracker);
+  const [selectedTracker, setSelectedTracker] = React.useState({});
 
   return <div>il y a {allTrackers.length} trackers</div>
 }
