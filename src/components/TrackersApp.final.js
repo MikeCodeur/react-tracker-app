@@ -12,7 +12,7 @@ function TrackersApp() {
   const handleTextChange = text => {
     setFilterText(text)
     const filteredTracker = db.filter(
-      track => track.name.toLowerCase().indexOf(text) === -1,
+      track => track.name.toLowerCase().indexOf(text) !== -1,
     )
     setAllTrackers(filteredTracker)
   }
