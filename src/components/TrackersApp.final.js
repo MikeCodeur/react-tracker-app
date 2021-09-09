@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-function App() {
+function TrackersApp() {
   return <div>final</div>
 }
-export {App}
+export {TrackersApp}
