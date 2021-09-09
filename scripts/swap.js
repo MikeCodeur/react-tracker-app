@@ -12,7 +12,7 @@ go()
 async function go() {
   let {2: match} = process.argv
 
-  const allowedTypes = [/^exercise$/, /^final$/, /^\d+$/]
+  const allowedTypes = [/^exercise$/, /^bonus$/, /^\d+$/]
 
   const variants = getVariants()
   const maxExtra = Math.max(
