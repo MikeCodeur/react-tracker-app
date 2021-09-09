@@ -1,5 +1,5 @@
-# Affichage des Trackers
-### 💡 Affichage des Trackers dans un tableau
+# Ajouter du style
+### 💡 Ajouter du style
 
 ## 📝 Tes notes
 
@@ -7,34 +7,30 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Nous allons afficher les trackers dans un composant `<TrackersTable />` qui est une tableau html classique 
-
-```html
-<table>
-    <thead>
-      <tr>
-        <th>Nom du Tracker</th>
-        <th>Début</th>
-        <th>Fin</th>
-        <th>Durée</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>name</td>
-          <td>starttime</td>
-          <td>endtime</td>
-          <td>duree</td>
-        </tr>
-    </tbody>
-  </table>
-```
+Il existe de nombreuses manière d'ajouter du style avec React. Nous allons le faire de manière simple et native via un fichier CSS pour customiser notre tableau nous utiliseront  `Trackers.css`
 
 ## Exercice
 
-Dans cet exercice tu vas devoir passer en props la liste de trackers au composant `<TrackersTable />` et ensuite afficher dynamiquement le tableau .
+Ajoute du style au tableau pour qu'il soit plus claire. Nous allons ajouter une className sur notre composant 
 
-> Pense à éditer `TrackersApp` pour y ajouter `TrackersTable`
+```bash
+<div className="TableContainer">
+```
+
+Ton objectif et d'utiliser les bon sélecteur pour pouvoir
+
+- Mettre une largeur de 100% sur `<table>`
+- Customiser le header du tableau (1 ligne sur 2)
+- Customiser une cellule
+- customiser une ligne
+- Customiser le hover
+- Utiliser les media query
+
+📑 Le lien vers la doc [nth-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child)
+
+📑 Le lien vers la doc [first-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child)
+
+📑 Le lien vers la doc [even odd rules](https://www.w3.org/Style/Examples/007/evenodd.en.html)
 
 ## 🐜 Feedback
 
