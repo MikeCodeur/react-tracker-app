@@ -1,10 +1,11 @@
 import * as React from 'react'
+import './Trackers.final.css'
 
 const TrackersTable = ({trackers}) => {
   return (
-    <>
+    <> 
       <h2>Liste des trackers</h2>
-      <div>
+      <div className="TableContainer">
         <table>
           <thead>
             <tr>
