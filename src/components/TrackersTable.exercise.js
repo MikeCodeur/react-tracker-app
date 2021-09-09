@@ -1,10 +1,13 @@
 import * as React from 'react'
+// 🐶 decommente la ligne du dessous pour importer le fichier css
+// import './Trackers.exercise.css'
 
-// 🐶 passe en prop 'trackers'
-const TrackersTable = () => {
+const TrackersTable = ({trackers}) => {
   return (
     <>
       <h2>Liste des trackers</h2>
+      {/* 🐶 Ajoute le ClassName 'TableContainer' sur la div du dessous */}
+      {/* tu peux ensuite aller suivre les instructions dans 'Trackers.exercise.css' */}
       <div>
         <table>
           <thead>
@@ -16,21 +19,17 @@ const TrackersTable = () => {
             </tr>
           </thead>
           <tbody>
-          {/* 🐶 parcours les trackers pour afficher une ligne de chaque tracker */}
-          {/* 🤖 utilise la méthode 'map' de 'array' `{trackers.map(tracker =>`  */}
-          {/* ⛏️ supprime les données d'exemples */}
-            <tr>
-              <td>exemple</td>
-              <td>starttime</td>
-              <td>endtime</td>
-              <td>duree</td>
-            </tr>
-            <tr>
-              <td>exemple 2</td>
-              <td>starttime</td>
-              <td>endtime</td>
-              <td>duree</td>
-            </tr>
+            {trackers.map(tracker => (
+              // 🐶 Ajoute le ClassName 'selectedline' sur <tr> ci dessous 
+              // Cela nous permettra plus tard d'y appliquer un style sur une ligne
+              // selectionné du tanleau
+              <tr>
+                <td>{tracker.name}</td>
+                <td>{tracker.starttime}</td>
+                <td>{tracker.endtime}</td>
+                <td>{tracker.name}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
