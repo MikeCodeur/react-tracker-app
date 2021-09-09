@@ -84,3 +84,8 @@
   background-color: #ee5f0c;
   box-shadow: 0 6px 6px -6px #0e1119;
 }
+
+.th-category {
+  color: rgb(24, 116, 177);
+  font-style: italic;
+}

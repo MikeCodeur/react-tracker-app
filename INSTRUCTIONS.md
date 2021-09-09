@@ -1,5 +1,5 @@
-# Ajouter du style
-### 💡 Ajouter du style
+# Grouper par catégories
+### 💡 Grouper par catégories
 
 ## 📝 Tes notes
 
@@ -7,30 +7,54 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Il existe de nombreuses manière d'ajouter du style avec React. Nous allons le faire de manière simple et native via un fichier CSS pour customiser notre tableau nous utiliseront  `Trackers.css`
+Nous allons maintenant regrouper les trackers par catégories pour nous simplifier la tache nous allons utiliser un `helper` avec une fonction `groupBy` qui va traiter nos données
+
+```java
+const trackersParCategory = groupBy(trackers, 'category')
+//va transformer en object grouper par category 
+{sport:[{t1},{t2}], code:[{t3},{t4}]}
+
+```
+
+Nous avons également découper le le composant table avec 2 autre composants : `TrackerRow` (nous avons juste deplacer le code dans un composant ) et `TrackerCategory` qui permettra de séparer par catégorie.
+
+```java
+const TrackerCategory = ({category}) => {
+  return (
+    <tr>
+      <th className="th-category" colSpan="4">
+        {category}
+      </th>
+    </tr>
+  )
+}
+
+const TrackerRow = ({tracker}) => {
+  return (
+    <tr>
+      <td>{tracker.name}</td>
+      <td>{tracker.starttime}</td>
+      <td>{tracker.endtime}</td>
+      <td>{tracker.name}</td>
+    </tr>
+  )
+}
+```
 
 ## Exercice
 
-Ajoute du style au tableau pour qu'il soit plus claire. Nous allons ajouter une className sur notre composant 
+Dans cette exercice il va falloir appeler `groupBy` pour grouper les trackers. et ensuite afficher un tableau grouper par catégorie avec un séparateur.
 
-```bash
-<div className="TableContainer">
-``` 
+## Bonus
 
-Ton objectif et d'utiliser les bon sélecteur pour pouvoir
+### 1. 🚀 Calcul de la durée d'une tache
 
-- Mettre une largeur de 100% sur `<table>`
-- Customiser le header du tableau (1 ligne sur 2)
-- Customiser une cellule
-- customiser une ligne
-- Customiser le hover
-- Utiliser les media query
+Utilise la fonction `diifTime` qui permet de calculer la durée entre 2 dates 
 
-📑 Le lien vers la doc [nth-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child)
-
-📑 Le lien vers la doc [first-child](https://developer.mozilla.org/en-US/docs/Web/CSS/:first-child)
-
-📑 Le lien vers la doc [even odd rules](https://www.w3.org/Style/Examples/007/evenodd.en.html)
+```java
+import {groupBy, diffTime} from '../helper'
+const duration = diffTime(tracker?.starttime, tracker?.endtime )
+```
 
 ## 🐜 Feedback
 
