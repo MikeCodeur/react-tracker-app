@@ -1,5 +1,5 @@
-# 01-composant-parent
-### 💡 Préparer le composant parent
+# Filtrer les Trackers
+### 💡 Filtrer les Trackers
 
 ## 📝 Tes notes
 
@@ -7,36 +7,13 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Le but du composant de plus haut niveau `<TrackersApp />` est de contenir tout le fonctionnement de l'application Tracker. (il pourrait y avoir d'autres applications dans notre site). `TrackersApp` sera donc le composant principale qui contiendra les composants enfants. `TrackersApp` contiendra les données (une liste de trackers), un texte de recherche (pour filtrer les tracker) et un `selectedTracker` qui nous permettra de savoir si 'un tracker est sélectionné (pour édition par exemple)
+Nous avons un composant enfant `FilterTrackers` qui contient un champ input qui permettra de filtrer les trackers. Nous devons faire monter au composant parent `TrackersApp` la chaine de caractère.
 
 ## Exercice
 
-Dans cet exercice tu vas devoir préparer ce composant l'afficher à l'écran dans App.js (le fichier principal de Create React App). Dans un premier temps on va juste afficher le nombre de tracker contenu dans notre base de données virtuelle (qui n'est juste qu'un simple `Array` pour le moment)
+Dans cet exercice tu vas devoir créer un composant `FilterTrackers` qui remontra la valeur saisie au parent. Il n'aura donc pas de state. On utilisera le pattern `State Hoisting`.
 
-```bash
-import {TrackersApp} from './components/TrackersApp'
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       
-      </header>
-      <TrackersApp />
-    </div>
-  );
-}
-```
-
-## Bonus
-
-### 1. 🚀 Afficher le nom de tous les trackers
-
-Affiche tous les noms de trackers en plus de "il y a 6 trackers" en parcourant notre database.
-
-## Aller plus loin
-
-📑 Le lien vers la doc de [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) 
+Tu vas devoir modifier 2 composants : `FilterTrackers` et `TrackersApp` 
 
 ## 🐜 Feedback
 
