@@ -16,7 +16,7 @@ function TrackersApp() {
     // db.filter((track) => condition)
     // la condition à respecter : il faut que la chaine de caractère 'text' soit trouvé dans 'track.name'
     // on ne prendra pas en conmpte la casse
-    // 🤖 track.name.toLowerCase().indexOf(text) === -1
+    // 🤖 track.name.toLowerCase().indexOf(text) !== -1
     // 🐶 met à jour le state 'allTrackers' avec ce tableau filtré
   }
 
