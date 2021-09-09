@@ -17,7 +17,8 @@ function spawnSync(command, options) {
 }
 
 function getExtraCreditNumberFromFilename(line) {
-  const m = line.match(/\.extra-(?<number>\d+).js$/)
+  //const m = line.match(/\.extra-(?<number>\d+).js$/)
+  const m = line.match(/\.bonus-(?<number>\d+).js$/)
   if (!m) {
     return null
   }
@@ -28,13 +29,13 @@ function getExtraCreditTitles() {
   const instructions = fs.readFileSync('INSTRUCTIONS.md', {encoding: 'utf-8'})
   return instructions
     .split('\n')
-    .filter(l => l.includes('💯'))
-    .map(l => l.replace(/^.*💯/, '').trim())
+    .filter(l => l.includes('🚀'))
+    .map(l => l.replace(/^.*🚀/, '').trim())
 }
 
 function getVariants() {
   const extraCreditTitles = getExtraCreditTitles()
-  const files = glob.sync('./+(src|cypress)/**/*.+(exercise|final|extra-)*.js')
+  const files = glob.sync('./+(src|cypress)/**/*.+(exercise|final|extra-|bonus-)*.js')
   const filesByMaster = {}
   for (const file of files) {
     const {dir, name, base, ext} = path.parse(file)
@@ -63,6 +64,7 @@ function getVariants() {
     if (base.includes('.final')) filesByMaster[main].final = info
     if (base.includes('.exercise')) filesByMaster[main].exercise = info
     if (base.includes('.extra')) filesByMaster[main].extras.push(info)
+    if (base.includes('.bonus')) filesByMaster[main].extras.push(info)
   }
   return filesByMaster
 }

@@ -2,8 +2,8 @@
 
 export * from './TrackersApp.exercise'
 
-// 🚀 Use `@reach/dialog`
+// 🚀 Uilisation de XXX
 // export * from './TrackersApp.bonus-1'
 
-// 🚀 Create a LoginForm component
+// 🚀 Uilisation de YYY
 // export * from './TrackersApp.bonus-2'

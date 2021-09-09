@@ -86,7 +86,7 @@ async function go() {
     const extrasLines = extras
       .map(
         ({exportLines, title}) =>
-          `// 💯 ${title}\n${l(exportLines) || '// no extra credit'}`,
+          `// 🚀 ${title}\n${l(exportLines) || '// no extra credit'}`,
       )
       .join('\n\n')
     return (

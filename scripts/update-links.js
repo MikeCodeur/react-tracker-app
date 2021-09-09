@@ -40,7 +40,7 @@ Production deploys:
     const line = lines[lineIndex]
     newLines.push(line)
 
-    const extraCreditMatch = line.match(/### (?<number>\d+)\. 💯 /)
+    const extraCreditMatch = line.match(/### (?<number>\d+)\. 🚀 /)
 
     if (/## Exercise$/.test(line)) {
       newLines.push('', ...exerciseProdDeployLines)

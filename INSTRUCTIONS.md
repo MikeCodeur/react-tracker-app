@@ -27,7 +27,7 @@ let's also render Login and Register buttons.
 
 ## Extra Credit
 
-### 1. 💯 Use `@reach/dialog`
+### 1. 🚀 Utilisation de aaa
 
 [Production deploy](https://exercises-01-bootstrap.bookshelf.lol/extra-1)
 
@@ -50,7 +50,7 @@ which can be set to `none`, `login`, or `register`.
 
 - `src/index.js`
 
-### 2. 💯 Create a LoginForm component
+### 2. 🚀 Create a LoginForm component
 
 [Production deploy](https://exercises-01-bootstrap.bookshelf.lol/extra-2)
 
