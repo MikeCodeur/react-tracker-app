@@ -1,9 +1,9 @@
-// export * from './TrackersApp.final'
+export * from './TrackersApp.final'
 
-export * from './TrackersApp.exercise'
+//export * from './TrackersApp.exercise'
 
-// 🚀 Uilisation de XXX
+// 🚀 Utilisation de aaa
 // export * from './TrackersApp.bonus-1'
 
-// 🚀 Uilisation de YYY
+// 🚀 Create a LoginForm component
 // export * from './TrackersApp.bonus-2'
