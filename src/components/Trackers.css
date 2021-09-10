@@ -50,6 +50,10 @@
 .TableContainer thead tr th:nth-child(odd) {
   color: #d10606a1;
 }
+.TableContainer thead tr th:nth-child(2),
+.TableContainer thead tr th:nth-child(3) {
+  min-width: 250px;
+ }
 
 .TableContainer tr:hover {
   background-color: #464a52;
