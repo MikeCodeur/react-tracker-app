@@ -27,12 +27,11 @@ function TrackersApp() {
   // et qui supprime ce 'tracker' de 'allTrackers' en se basant dur l'id
   // utilise 'filter' (ou solution équivalente) :
   // 🤖 arrayExistant.filter((item) => item.id !== elementASupprimer.id)
-  
+
   // 🐶 créé une fonctions 'handleUpdateTracker' qui prend en paramètre un 'tracker'
   // et qui met à jour ce 'tracker' dans 'allTrackers' en se basant dur l'id
   // utilise 'map' (ou solution équivalente):
   // 🤖 updatedArray = arrayExistant.map(item => item.id === elementAMaj.id ? elementAMaj : item)
-
 
   return (
     <div>
