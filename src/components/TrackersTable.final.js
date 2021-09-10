@@ -1,51 +1,49 @@
 import * as React from 'react'
 import './Trackers.css'
-import {groupBy} from '../helper'
+import {groupBy, diffTime} from '../helper'
+import {TrackerCategory} from './TrackerCategory'
 
-const TrackerCategory = ({category}) => {
-  return (
-    <tr>
-      <th className="th-category" colSpan="4">
-        {category}
-      </th>
-    </tr>
-  )
-}
+const TrackerRow = ({tracker, selectedId, onSelected}) => {
+  const duration = diffTime(tracker?.starttime, tracker?.endtime)
 
-const TrackerRow = ({tracker}) => {
+  const handleClick = e => {
+    onSelected(tracker)
+  }
+  const selected = tracker.id === selectedId ? 'selectedline' : ''
   return (
-    <tr>
+    <tr className={selected} onClick={handleClick}>
       <td>{tracker.name}</td>
       <td>{tracker.starttime}</td>
       <td>{tracker.endtime}</td>
-      <td>2j 3h 45min 18 sec </td>
+      <td>{duration}</td>
     </tr>
   )
 }
 
-const TrackersTable = ({trackers}) => {
-  const rows = [];
-  let lastCategory = "";
+const TrackersTable = ({trackers, selectedTracker, onSelectedTracker}) => {
+  const rows = []
+  let lastCategory = ''
 
   const trackersParCategory = groupBy(trackers, 'category')
   Object.keys(trackersParCategory).forEach(category => {
-
-    trackersParCategory[category].forEach((tracker) => {
+    trackersParCategory[category].forEach(tracker => {
       if (tracker.category !== lastCategory) {
         rows.push(
           <TrackerCategory
             key={category}
             category={tracker.category}
-          ></TrackerCategory>
-        );
+          ></TrackerCategory>,
+        )
       }
-      rows.push(<TrackerRow
-        key={tracker.id}
-        tracker={tracker}
-      ></TrackerRow>
-    );
-    lastCategory = tracker.category
-
+      rows.push(
+        <TrackerRow
+          key={tracker.id}
+          tracker={tracker}
+          selectedId={selectedTracker?.id}
+          onSelected={onSelectedTracker}
+        ></TrackerRow>,
+      )
+      lastCategory = tracker.category
     })
   })
 
@@ -62,9 +60,7 @@ const TrackersTable = ({trackers}) => {
               <th>Durée</th>
             </tr>
           </thead>
-          <tbody>
-            {rows}
-          </tbody>
+          <tbody>{rows}</tbody>
         </table>
       </div>
     </>

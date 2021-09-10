@@ -1,54 +1,54 @@
 import * as React from 'react'
 import './Trackers.css'
-// 🐶 importe le helper groupBy
-// 🤖 import {groupBy} from '../helper'
+import {groupBy, diffTime} from '../helper'
+import {TrackerCategory} from './TrackerCategory'
 
-const TrackerCategory = ({category}) => {
-  return (
-    <tr>
-      <th className="th-category" colSpan="4">
-        {category}
-      </th>
-    </tr>
-  )
-}
-
+// 🐶 créé 2 props 'selectedId' et 'onSelected'
 const TrackerRow = ({tracker}) => {
+  const duration = diffTime(tracker?.starttime, tracker?.endtime)
+
+  // 🐶 créé une fonction 'handleClick' qui sera déclanchée sur le 'onClick' de <tr>
+  // cette fonction appelera ensuite `onSelected` avec le tracker courant
+
+  // 🐶 gère l'affichage de la ligne selectionée en comparant 'selectedId' et 'tracker.id'
+  // applique className 'selectedline' sur la ligne selectionné
   return (
+    // 🐶 <tr> : n'oublie pas le 'className' et 'onClick'
     <tr>
       <td>{tracker.name}</td>
       <td>{tracker.starttime}</td>
       <td>{tracker.endtime}</td>
-      <td>2j 3h 45min 18 sec </td>
+      <td>{duration}</td>
     </tr>
   )
 }
 
+// 🐶 créé 2 props 'selectedTracker' et 'onSelectedTracker'
 const TrackersTable = ({trackers}) => {
-  // 🐶 créé un array 'rows' qui contindra nos lignes à afficher
-  // 🐶 créé un string 'lastCategory' qui contindra la dernière
-  // catégorie traitée :  (sera utile plus tard)
+  const rows = []
+  let lastCategory = ''
 
-  // 🐶 appelle 'groupBy'
-  const trackersParCategory = []
-  // 🤖 const trackersParCategory = groupBy(trackers, 'category')
-
+  const trackersParCategory = groupBy(trackers, 'category')
   Object.keys(trackersParCategory).forEach(category => {
-    trackersParCategory[category].forEach((tracker) => {
-      // 🐶 La première fois on ajoute dans 'rows' ligne catégorie 🤖 `rows.push(<TrackerCategory`
-      // pour savoir si c'est la première fois que l'on rencontre une catégorie, on se base dur 'lastCategory'
-      // 🤖 if (tracker.category !== lastCategory) {
-      
-      // 🐶 ajoute le tracker dans rows 🤖 `rows.push(<TrackerRow`
-      // n'oublie pas les key sur les composants
-
-      // 🐶 met à jour la variable 'lastCategory' avec  'tracker.category' pour que l'on ajoute 
-      // pas une deuxieme ligne <TrackerCategory> pour rien
-
+    trackersParCategory[category].forEach(tracker => {
+      if (tracker.category !== lastCategory) {
+        rows.push(
+          <TrackerCategory
+            key={category}
+            category={tracker.category}
+          ></TrackerCategory>,
+        )
+      }
+      // 🐶 utilise 'selectedTracker' et 'onSelectedTracker' pour passer les bons
+      // props à <TrackerRow>
+      // va ensuite modifier TrackerApp
+      rows.push(<TrackerRow key={tracker.id} tracker={tracker}></TrackerRow>)
+      lastCategory = tracker.category
     })
   })
+
   return (
-    <> 
+    <>
       <h2>Liste des trackers</h2>
       <div className="TableContainer">
         <table>
@@ -60,12 +60,7 @@ const TrackersTable = ({trackers}) => {
               <th>Durée</th>
             </tr>
           </thead>
-          <tbody>
-          {/* ⛏️ supprime le `trackers.map...` et remplace par {rows}   */}
-            {trackers.map(tracker => (
-              <TrackerRow tracker={tracker} />
-            ))}
-          </tbody>
+          <tbody>{rows}</tbody>
         </table>
       </div>
     </>
