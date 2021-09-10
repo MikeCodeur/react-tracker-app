@@ -1,5 +1,5 @@
-# Grouper par catégories
-### 💡 Grouper par catégories
+# Sélection d'un Tracker
+### 💡 Sélection d'un Tracker
 
 ## 📝 Tes notes
 
@@ -7,54 +7,25 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Nous allons maintenant regrouper les trackers par catégories pour nous simplifier la tache nous allons utiliser un `helper` avec une fonction `groupBy` qui va traiter nos données
+Le but ici va être de sélectionner un tracker dans notre tableau. Le tracker sélectionné doit remonter  au composant parent `TrackerApp` dans le but de pouvoir être manipuler plus tard (mise à jour, suppression etc...). Nous avions déjà créé le state correspondant. 
 
-```java
-const trackersParCategory = groupBy(trackers, 'category')
-//va transformer en object grouper par category 
-{sport:[{t1},{t2}], code:[{t3},{t4}]}
-
+```jsx
+const [selectedTracker, setSelectedTracker] = React.useState({})
 ```
 
-Nous avons également découper le le composant table avec 2 autre composants : `TrackerRow` (nous avons juste deplacer le code dans un composant ) et `TrackerCategory` qui permettra de séparer par catégorie.
+Il va falloir également appliquer un style particulier pour la ligne sélectionnée (nous avions créer une classe pour cela précédemment)
 
-```java
-const TrackerCategory = ({category}) => {
-  return (
-    <tr>
-      <th className="th-category" colSpan="4">
-        {category}
-      </th>
-    </tr>
-  )
-}
-
-const TrackerRow = ({tracker}) => {
-  return (
-    <tr>
-      <td>{tracker.name}</td>
-      <td>{tracker.starttime}</td>
-      <td>{tracker.endtime}</td>
-      <td>{tracker.name}</td>
-    </tr>
-  )
-}
-```
+> A noter que pour simplifier nous avons déplacer le composant `TrackerCategory` dans un fichier js à part. (nous ferons de même par la suite pour `TrackerRow`)
 
 ## Exercice
 
-Dans cette exercice il va falloir appeler `groupBy` pour grouper les trackers. et ensuite afficher un tableau grouper par catégorie avec un séparateur.
+Dans cet exercice tu vas devoir faire descendre puis remonter le state `selectedTracker` qui est un objet contenant le tracker sélectionné. Tu vas devoir passer à travers  `TrackersTable` puis `TrackerRow`. 
+
+Grace à cette information (`selectedTracker` ), `TrackerRow` va pouvoir choisir le style à appliquer sur la ligne : (style sélectionné ou non )
+
+> N'oublie pas de modifier les fichiers  `TrackersTable` et ensuite `TrackersApp`
 
 ## Bonus
-
-### 1. 🚀 Calcul de la durée d'une tache
-
-Utilise la fonction `diifTime` qui permet de calculer la durée entre 2 dates 
-
-```java
-import {groupBy, diffTime} from '../helper'
-const duration = diffTime(tracker?.starttime, tracker?.endtime )
-```
 
 ## 🐜 Feedback
 

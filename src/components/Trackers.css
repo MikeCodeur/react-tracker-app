@@ -7,7 +7,7 @@
   margin-bottom: 30px;
 }
 
-.TableContainer table{
+.TableContainer table {
   width: 100%;
 }
 
@@ -47,9 +47,9 @@
   color: #ffffffa1;
 }
 
- .TableContainer thead tr th:nth-child(odd) {
+.TableContainer thead tr th:nth-child(odd) {
   color: #d10606a1;
-} 
+}
 
 .TableContainer tr:hover {
   background-color: #464a52;
@@ -59,9 +59,7 @@
 .TableContainer td:hover {
   background-color: #12688a;
   color: #403e10;
-
 }
-
 
 @media (max-width: 600px) {
   .TableContainer td:nth-child(2),
@@ -78,7 +76,6 @@
     display: none;
   }
 }
-
 
 .selectedline td {
   background-color: #ee5f0c;
