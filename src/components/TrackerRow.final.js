@@ -12,7 +12,6 @@ const TrackerRow = ({tracker, selectedId, onSelected}) => {
   )
 
   React.useEffect(() => {
-    console.log(duration)
     const refresh = () => {
       setDuration(diffTime(tracker?.starttime, tracker?.endtime))
     }
