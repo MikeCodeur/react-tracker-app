@@ -1,5 +1,5 @@
-# Sélection d'un Tracker
-### 💡 Sélection d'un Tracker
+# Gestion des dates / durées / refresh
+### 💡 Gestion des dates / durées / refresh
 
 ## 📝 Tes notes
 
@@ -7,25 +7,32 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Le but ici va être de sélectionner un tracker dans notre tableau. Le tracker sélectionné doit remonter  au composant parent `TrackerApp` dans le but de pouvoir être manipuler plus tard (mise à jour, suppression etc...). Nous avions déjà créé le state correspondant. 
+Dans notre base de données les dates sont sotckée sous forme de chaine de caractère au format selon la norme iso8601 au format Date et Time exemple pour le 01 Novembre 2021 à 16 heures 40 minutes et 1 secondes
 
 ```jsx
-const [selectedTracker, setSelectedTracker] = React.useState({})
+2021-11-01T16:40:01
 ```
 
-Il va falloir également appliquer un style particulier pour la ligne sélectionnée (nous avions créer une classe pour cela précédemment)
+📑 Lien vers le Wiki [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
 
-> A noter que pour simplifier nous avons déplacer le composant `TrackerCategory` dans un fichier js à part. (nous ferons de même par la suite pour `TrackerRow`)
+En peut ensuite instancier un objet Date facilement grâce à ce string et ensuite le manipuler plus facilement  
+
+```jsx
+const date = new Date("2021-11-01T16:40:01")
+date.toLocaleString()
+```
 
 ## Exercice
 
-Dans cet exercice tu vas devoir faire descendre puis remonter le state `selectedTracker` qui est un objet contenant le tracker sélectionné. Tu vas devoir passer à travers  `TrackersTable` puis `TrackerRow`. 
+Dans cet exercice tu vas devoir afficher les dates au format locale. Quand le tracker n'a pas de date de fin c'est qu'il est en cours. il faudra afficher un libellé : 'En cours...'.
 
-Grace à cette information (`selectedTracker` ), `TrackerRow` va pouvoir choisir le style à appliquer sur la ligne : (style sélectionné ou non )
+Il va ensuite falloir mettre à jour la durée toute les secondes pour voir le compteur évoluer. pour cela on utilisera `setTimeout` qui appellera une fonction `refresh`
 
-> N'oublie pas de modifier les fichiers  `TrackersTable` et ensuite `TrackersApp`
+```jsx
+const timerID = setTimeout(() => refresh(), 1000)
+```
 
-## Bonus
+📑 doc setTimout [https://www.w3schools.com/jsref/met_win_settimeout.asp](https://www.w3schools.com/jsref/met_win_settimeout.asp)
 
 ## 🐜 Feedback
 
