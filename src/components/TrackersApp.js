@@ -1,6 +1,6 @@
-export * from './TrackersApp.final'
+// export * from './TrackersApp.final'
 
-//export * from './TrackersApp.exercise'
+export * from './TrackersApp.exercise'
 
-// 🚀 Utilisation de aaa
-//export * from './TrackersApp.bonus-1'
+// 🚀 Afficher le nom de tous les trackers
+// export * from './TrackersApp.bonus-1'
