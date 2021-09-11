@@ -9,14 +9,21 @@ const newTracker = () => ({
   endtime: '',
   name: '',
 })
+const newTracker2 = {
+  id: uuidv4(),
+  category: 'Défaut',
+  starttime: getDateTimeForPicker(),
+  endtime: '',
+  name: '',
+}
 
 const TrackerEditForm = ({
-  selectedTracker = {...newTracker(), id: ''},
+  selectedTracker = {...newTracker2, id: ''},
   onAddTracker,
   onDeleteTracker,
   onUpdateTracker,
 }) => {
-  const [tracker, setTracker] = React.useState(selectedTracker)
+  const [tracker, setTracker] = React.useState({...newTracker2, id: ''})
 
   const handleTrackerName = e => {
     setTracker({...tracker, name: e.target.value})
@@ -32,11 +39,10 @@ const TrackerEditForm = ({
   }
 
   React.useEffect(() => {
-    if (selectedTracker?.id !== tracker.id) {
+    if (selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id) {
       setTracker(selectedTracker)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTracker])
+  }, [tracker, selectedTracker])
 
   const handleOnSubmit = e => {
     e.preventDefault()
@@ -54,7 +60,7 @@ const TrackerEditForm = ({
   const handleNewTracker = () => {
     setTracker(newTracker())
   }
-
+  const disabled = tracker.id === '' ? true : false
   return (
     <>
       <form className="Form" onSubmit={handleOnSubmit}>
@@ -62,6 +68,7 @@ const TrackerEditForm = ({
           <legend>Gestion des Trackers</legend>
           <label htmlFor="trackerName">Nom du tracker : </label>
           <input
+            disabled={disabled}
             type="text"
             id="trackerName"
             placeholder="tracker name..."
@@ -71,6 +78,7 @@ const TrackerEditForm = ({
 
           <label htmlFor="trackerDateStart">Date de début : </label>
           <input
+            disabled={disabled}
             id="trackerDateStart"
             type="datetime-local"
             placeholder="durée..."
@@ -82,6 +90,7 @@ const TrackerEditForm = ({
           <label htmlFor="trackerDateEnd">Date de fin : </label>
 
           <input
+            disabled={disabled}
             id="trackerDateEnd"
             type="datetime-local"
             placeholder="durée..."
@@ -92,7 +101,7 @@ const TrackerEditForm = ({
 
           <label>
             Categorie:
-            <select value={tracker.category} onChange={handleTrackerCategory}>
+            <select disabled={disabled} value={tracker.category} onChange={handleTrackerCategory}>
               <option value="Sport">Sport</option>
               <option value="Code">Code</option>
               <option value="Perso">Perso</option>
@@ -107,13 +116,15 @@ const TrackerEditForm = ({
               value="Nouveau Tracker"
               onClick={handleNewTracker}
             ></input>
-            <input type="submit" value="Ajouter"></input>
+            <input disabled={disabled} type="submit" value="Ajouter"></input>
             <input
+              disabled={disabled}
               type="button"
               value="Supprimer"
               onClick={handleDeleteTracker}
             ></input>
             <input
+              disabled={disabled}
               type="button"
               value="Mettre à jour"
               onClick={handleUpdateTracker}

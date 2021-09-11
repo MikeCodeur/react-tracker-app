@@ -15,7 +15,7 @@ import {getDateTimeForPicker} from '../helper'
 // })
 
 // 🐶 créé les 4 props 'selectedTracker', 'onAddTracker', 'onDeleteTracker' et 'onUpdateTracker'
-// initalise par defaut 🤖 `selectedTracker = newTracker()`
+// initalise par défaut 🤖 `selectedTracker avec newTracker()` et surchage pour que l'id soit une string vide ""
 const TrackerEditForm = ({}) => {
   // 🐶 créé un state 'tracker' initialisé avec 'selectedTracker'
 
@@ -34,14 +34,21 @@ const TrackerEditForm = ({}) => {
   // 🐶 créé une fonction 'handleDeleteTracker' qui va appeler 'onDeleteTracker'
 
   // 🐶 créé une fonction 'handleNewTracker' qui va mettre à jour le state tracker
-  // avec (newTracker()()
+  // avec newTracker()
 
   // 🐶 met à jour le state tracker quand 'selectedTracker' change de valeur.
   // ceci ce produit lors d'un clique sur le tableau par exemple, une nouvelle
   // valeur de 'selectedTracker' arrive et il faut mettre à jour le state.
   // 🤖 utilise 'useEffect'
-  // conditionne la mise à jour du tracker si les ids sont differents
-  // 🤖 selectedTracker?.id !== tracker.id
+  // conditionne la mise à jour du tracker si les ids sont differents et non vide
+  // 🤖 selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id
+
+  // 🐶 On veut maintenant activer / desactiver les boutons / Champs input en fonction 
+  // de l'état du tracker (pas de tracker à editer / tracker à editer )
+  // on se base sur l'id 
+  // 🤖 créée const disabled
+  // si id vide 'disabled' est à true, false sinon
+  // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')
 
   return (
     <>
