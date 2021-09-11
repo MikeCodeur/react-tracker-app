@@ -1,3 +1,3 @@
-export * from './TrackersTable.final'
+// export * from './TrackersTable.final'
 
-//export * from './TrackersTable.exercise'
+export * from './TrackersTable.exercise'
