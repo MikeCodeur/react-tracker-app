@@ -1,3 +1,3 @@
-export * from './TrackerRow.final'
+// export * from './TrackerRow.final'
 
-//export * from './TrackerRow.exercise'
+export * from './TrackerRow.exercise'
