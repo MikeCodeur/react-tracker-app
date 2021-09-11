@@ -9,21 +9,14 @@ const newTracker = () => ({
   endtime: '',
   name: '',
 })
-const newTracker2 = {
-  id: uuidv4(),
-  category: 'Défaut',
-  starttime: getDateTimeForPicker(),
-  endtime: '',
-  name: '',
-}
 
 const TrackerEditForm = ({
-  selectedTracker = {...newTracker2, id: ''},
+  selectedTracker = {...newTracker(), id: ''},
   onAddTracker,
   onDeleteTracker,
   onUpdateTracker,
 }) => {
-  const [tracker, setTracker] = React.useState({...newTracker2, id: ''})
+  const [tracker, setTracker] = React.useState(selectedTracker)
 
   const handleTrackerName = e => {
     setTracker({...tracker, name: e.target.value})
