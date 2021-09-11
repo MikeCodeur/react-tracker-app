@@ -2,6 +2,68 @@ import * as React from 'react'
 import {v4 as uuidv4} from 'uuid'
 import {getDateTimeForPicker} from '../helper'
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'new':
+      return {
+        status: 'new',
+        tracker: action.payload,
+        activeButtons: {btnSave: true, btnUp: false, btnDel: false},
+        activeInput: true,
+        error: null,
+      }
+    case 'edit':
+      return {
+        status: 'edition',
+        tracker: action.payload,
+        activeButtons: {btnSave: false, btnUp: true, btnDel: true},
+        activeInput: true,
+        error: null,
+      }
+    case 'save':
+      return {
+        ...state,
+        status: 'saved',
+        activeButtons: {btnSave: false, btnUp: false, btnDel: false},
+        activeInput: false,
+        error: null,
+      }
+    case 'update':
+      return {
+        ...state,
+        status: 'updated',
+        activeButtons: {btnSave: false, btnUp: true, btnDel: true},
+        activeInput: true,
+        error: null,
+      }
+    case 'delete':
+      return {
+        ...state,
+        status: 'deleted',
+        tracker: action.payload,
+        activeButtons: {btnSave: false, btnUp: false, btnDel: false},
+        activeInput: false,
+        error: null,
+      }
+    case 'fail':
+      return {
+        status: 'fail',
+        tracker: null,
+        activeButtons: {btnSave: true, btnUp: true, btnDel: true},
+        activeInput: false,
+        error: action.error,
+      }
+    case 'trackerChange':
+      return {
+        ...state,
+        tracker: action.payload,
+        error: null,
+      }
+    default:
+      throw new Error('Action non supporté')
+  }
+}
+
 const newTracker = () => ({
   id: uuidv4(),
   category: 'Défaut',
@@ -9,58 +71,74 @@ const newTracker = () => ({
   endtime: '',
   name: '',
 })
-const newTracker2 = {
-  id: uuidv4(),
-  category: 'Défaut',
-  starttime: getDateTimeForPicker(),
-  endtime: '',
-  name: '',
-}
 
 const TrackerEditForm = ({
-  selectedTracker = {...newTracker2, id: ''},
+  selectedTracker = {...newTracker(), id: ''},
   onAddTracker,
   onDeleteTracker,
   onUpdateTracker,
 }) => {
-  const [tracker, setTracker] = React.useState({...newTracker2, id: ''})
+  const [state, dispatch] = React.useReducer(reducer, {
+    tracker: selectedTracker,
+    error: null,
+    status: 'idle',
+    activeButtons: {btnSave: false, btnUp: false, btnDel: false},
+  })
 
   const handleTrackerName = e => {
-    setTracker({...tracker, name: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...state.tracker, name: e.target.value},
+    })
   }
+
   const handleTrackerStartTime = e => {
-    setTracker({...tracker, starttime: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...state.tracker, starttime: e.target.value},
+    })
   }
+
   const handleTrackerEndTime = e => {
-    setTracker({...tracker, endtime: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...state.tracker, endtime: e.target.value},
+    })
   }
+
   const handleTrackerCategory = e => {
-    setTracker({...tracker, category: e.target.value})
+    dispatch({
+      type: 'trackerChange',
+      payload: {...state.tracker, category: e.target.value},
+    })
   }
 
   React.useEffect(() => {
-    if (selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id) {
-      setTracker(selectedTracker)
+    if (selectedTracker?.id !== '') {
+      dispatch({type: 'edit', payload: selectedTracker})
     }
-  }, [tracker, selectedTracker])
+  }, [selectedTracker])
 
   const handleOnSubmit = e => {
     e.preventDefault()
-    onAddTracker(tracker)
+    onAddTracker(state.tracker)
+    dispatch({type: 'save'})
   }
 
   const handleUpdateTracker = () => {
-    onUpdateTracker(tracker)
+    onUpdateTracker(state.tracker)
+    dispatch({type: 'update'})
   }
 
   const handleDeleteTracker = () => {
-    onDeleteTracker(tracker)
+    onDeleteTracker(state.tracker)
+    dispatch({type: 'delete', payload: newTracker()})
   }
 
   const handleNewTracker = () => {
-    setTracker(newTracker())
+    dispatch({type: 'new', payload: newTracker()})
   }
-  const disabled = tracker.id === '' ? true : false
+
   return (
     <>
       <form className="Form" onSubmit={handleOnSubmit}>
@@ -68,40 +146,44 @@ const TrackerEditForm = ({
           <legend>Gestion des Trackers</legend>
           <label htmlFor="trackerName">Nom du tracker : </label>
           <input
-            disabled={disabled}
+            disabled={!state.activeInput}
             type="text"
             id="trackerName"
             placeholder="tracker name..."
             onChange={handleTrackerName}
-            value={tracker.name}
+            value={state.tracker.name}
           ></input>
 
           <label htmlFor="trackerDateStart">Date de début : </label>
           <input
-            disabled={disabled}
+            disabled={!state.activeInput}
             id="trackerDateStart"
             type="datetime-local"
             placeholder="durée..."
             onChange={handleTrackerStartTime}
-            value={tracker.starttime}
+            value={state.tracker.starttime}
             step="2"
           ></input>
 
           <label htmlFor="trackerDateEnd">Date de fin : </label>
 
           <input
-            disabled={disabled}
+            disabled={!state.activeInput}
             id="trackerDateEnd"
             type="datetime-local"
             placeholder="durée..."
             onChange={handleTrackerEndTime}
-            value={tracker.endtime}
+            value={state.tracker.endtime}
             step="2"
           ></input>
 
           <label>
             Categorie:
-            <select disabled={disabled} value={tracker.category} onChange={handleTrackerCategory}>
+            <select
+              disabled={!state.activeInput}
+              value={state.tracker.category}
+              onChange={handleTrackerCategory}
+            >
               <option value="Sport">Sport</option>
               <option value="Code">Code</option>
               <option value="Perso">Perso</option>
@@ -116,15 +198,19 @@ const TrackerEditForm = ({
               value="Nouveau Tracker"
               onClick={handleNewTracker}
             ></input>
-            <input disabled={disabled} type="submit" value="Ajouter"></input>
             <input
-              disabled={disabled}
+              disabled={!state.activeButtons.btnSave}
+              type="submit"
+              value="Ajouter"
+            ></input>
+            <input
+              disabled={!state.activeButtons.btnDel}
               type="button"
               value="Supprimer"
               onClick={handleDeleteTracker}
             ></input>
             <input
-              disabled={disabled}
+              disabled={!state.activeButtons.btnUp}
               type="button"
               value="Mettre à jour"
               onClick={handleUpdateTracker}

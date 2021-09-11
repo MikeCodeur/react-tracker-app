@@ -1,5 +1,5 @@
-# Formulaire d'édition
-### 💡 Formulaire d'édition de Tracker
+# Formulaire d'édition avancé
+### 💡 Formulaire d'édition avancé
 
 ## 📝 Tes notes
 
@@ -7,63 +7,131 @@ Detaille ce que tu as appris ici `INSTRUCTIONS.md`ou sur une page [Notion](h
 
 ## Comprendre
 
-Nous allons utiliser un formulaire HTML classique avec :
+La logique peut vite devenir complexe à gérer lorsque l'on a des états et des transitions. Exemple de Diagram de transition sur des boutons 
 
-- des `input` de type `text`
-- des `input` de type `datetime-local` pour sélectionner les dates
-- un `select` pour la combo box des catégories de trackers
+```jsx
+![Tux, the Linux mascot](/state-transition.png
+```
+
+imaginons nous souhaitons gérer plus finement les états de nos boutons , Nouveau, Ajouter, Supprimer Mettre à jour. On pourrait gérer des Boolean de la manière suivante.
+
+```jsx
+const disabled = tracker.id === '' ? true : false
+const disabledButonNew = //logique à implementer
+const disabledButonAdd = //logique à implementer
+const disabledButonUpdate = //logique à implementer
+const disabledButonDelete = //logique à implementer
+const disabledLabel = //logique à implementer
+//etc..
+```
+
+Cette manière fonctionne mais peut vite devenir compliquer à maintenir par la multiplication des boolean. A la place il est possible d'utiliser un reducer qui permet de gerer l'état en cours, les données, les états des bouton et des champs inputs (et tout autre future états a gérer )
+
+```jsx
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "new":
+      return {
+        status: "new",
+        tracker: action.payload,
+        activeButtons: { btnSave: true, btnUp: false, btnDel: false },
+        activeInput: true,
+        error: null,
+      };
+    case "edit":
+    //etc ...
+    default:
+      throw new Error("Action non supporté");
+  }
+};
+const [state, dispatch] = React.useReducer(reducer, {
+    tracker: selectedTracker,
+    error: null,
+    status: "idle",
+    activeButtons: { btnSave: false, btnUp: false, btnDel: false },
+  });
+```
 
 ## Exercice
 
-👨‍✈️ Hugo le chef de projet nous demande de créée un formulaire pour pourvoir éditer les tracker avec des boutons d'action 
+👨‍✈️ Hugo le chef de projet nous demande d'implémenter la logique suivante :
 
-Dans cet exercice tu va devoir créer le formulaire  `TrackerEditForm` qui prend en `props`.
+- Au démarrage, dans l'état initial, tous les champs input sont désactivés
+- Au démarrage, dans l'état initial, tous les boutons sont désactivé à l'exception de  "Nouveau Tracker"
 
-- `selectedTracker` (le tracker sélectionné à éditer )
-- `onAddTracker` (fonction pour ajouter le tracker à notre base de données)
-- `onDeleteTracker` (fonction pour supprimer le tracker à notre base de données)
-- `onUpdateTracker`(fonction pour mettre à jour le tracker à notre base de données)
+Lors d'un clique sur "Nouveau Tracker"
 
-Il y aura aussi une zone d'action avec 4 boutons
+- Les champs input sont actifs
+- Le bouton 'Ajouter'  s'active et permet d'ajouter le tracker
 
-- Nouveau tracker
-- Ajouter
-- Supprimer
-- Mettre à jour
+Lors d'un clique sur "Ajouter"
 
-Nous utiliseront 
+- Le tracker est ajouté en base de données et seul le bouton "Nouveau Tracker" est actif
 
-```jsx
-import {v4 as uuidv4} from 'uuid'
-//id: uuidv4()
-```
+Lors d'un clique sur une des ligne du tableau 
 
-📑 Doc vers [UUID](https://www.npmjs.com/package/uuid)
+- Le bouton "Ajouter" est désactivé
+- Le bouton 'Nouveau tracker', 'Supprimer' et 'Mettre à jour'  son actifs
 
-Nous utiliseront également la fonction `getDateTimeForPicker` du helper qui permet d'avoir un format reconnu par le input `datetime-local`, ce qui permet d'avoir une date setter correctement au démarrage.
-
-```jsx
-import {getDateTimeForPicker} from '../helper'
-//starttime: getDateTimeForPicker()
-```
+Dans cet exercice tu vas devoir implémenter cela avec le reducer 
 
 ## Bonus
 
-### 1. 🚀 Validation de données
+### 1. 🚀 Exporter le comportement dans un hook custom
 
-Pour éviter d'insérer n'importe quoi, vous allons valider les données. (nous utiliseront un simple `alert()` pour l'exercice) 
+Dans cet exercice tu vas devoir créer une hook personnalisé. L'idée est de pouvoir réutiliser la logiques d'états / Buttons / Champs.
 
-Dans la fonction `handleAddTracker` et `handleUpdateTracker`  vérifie que :
+Créé un hook `useEditTracker` qui retourne toutes ces propriétés : 
 
-- `id` est présent sinon affiche *'il manque le tracker id'*
-- `name` est présent sinon affiche '*veuillez renseigner le nom du tracker'*
-- `starttime` est présent sinon affiche 'veuillez renseigner la date de début'
-- `category` est présent sinon affiche 'veuillez renseigner la catégori'
+```jsx
+function useEditTracker({defaultTracker}) {
+  const [state, dispatch] = React.useReducer(reducer, {
+    tracker: defaultTracker,
+    error: null,
+    status: 'idle',
+    activeButtons: {btnSave: false, btnUp: false, btnDel: false},
+  })
+ //todo
 
-Pour `handleDeleteTracker`vérifie que :
+  return {
+    tracker,
+    error,
+    status,
+    activeButtons,
+    activeInput,
+    setTracker,
+    editTracker,
+    saveTracker,
+    updateTracker,
+    deleteTracker,
+    newTracker,
+  }
+}
+```
 
-- `id` est présent sinon affiche *'il manque le tracker id'*
+Creer dans ce hook les fonctions suivantes 
 
-## 🐜 Feedback
+- setTracker
+- editTracker
+- saveTracker
+- updateTracker
+- deleteTracker
+- newTracker
 
-Remplir le formulaire le [formulaire de FeedBack](https://go.mikecodeur.com/cours-react-avis).
+qui font appel au dispatch avec les bonne valeurs.
+
+Utilise le ensuite de la manière suivante  dans le composant
+
+```jsx
+const {
+    tracker,
+    activeButtons,
+    activeInput,
+    setTracker,
+    editTracker,
+    saveTracker,
+    updateTracker,
+    deleteTracker,
+    newTracker,
+  } = useEditTracker(selectedTracker)
+```
