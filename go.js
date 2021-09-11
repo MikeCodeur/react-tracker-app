@@ -26,11 +26,11 @@ async function go() {
   const {action} = await inquirer.prompt([
     {
       name: 'action',
-      message: `What do you want to do?`,
+      message: `Que veux tu faire ?`,
       type: 'list',
       choices: [
-        {name: 'Change Exercise', value: 'changeExercise'},
-        {name: 'Start Extra Credit', value: 'startExtraCredit'},
+        {name: 'Changer d\'exercise', value: 'changeExercise'},
+        {name: 'Démmarrer les bonus', value: 'startExtraCredit'},
       ],
     },
   ])
@@ -50,11 +50,11 @@ async function changeExercise() {
   const {branch} = await inquirer.prompt([
     {
       name: 'branch',
-      message: `Which exercise do you want to start working on?`,
+      message: `Sur quel exercice veux tu travailler ?`,
       type: 'list',
       default: currentBranch,
       choices: [
-        {name: 'Return to main', value: 'main'},
+        {name: 'Returner sur la branche main', value: 'main'},
         ...getExerciseBranches().map(b => ({
           name: getDisplayName(b),
           value: b,
@@ -68,7 +68,7 @@ async function changeExercise() {
   if (branch.startsWith('exercises/')) {
     spawnSync('node ./scripts/swap exercise')
   }
-  console.log(`✅  Ready to start work in ${branch}`)
+  console.log(`✅ Pret à travailler sur ${branch}`)
 }
 
 async function startExtraCredit() {
@@ -83,13 +83,13 @@ async function startExtraCredit() {
 
   function getVariantDisplayName(variant) {
     if (variant === 'final') return 'Final'
-    return `Extra Credit ${variant}: ${extraCreditTitles[variant - 1]}`
+    return `Bonus ${variant}: ${extraCreditTitles[variant - 1]}`
   }
 
   const {variant} = await inquirer.prompt([
     {
       name: 'variant',
-      message: `Which part do you want to work on?`,
+      message: `Sur quelle partie veux tu travailler ?`,
       type: 'list',
       choices: [
         {name: 'Final', value: 'final'},
@@ -116,7 +116,7 @@ async function startExtraCredit() {
       fs.writeFileSync(exercise.file, newExerciseContents)
     }
   }
-  console.log(`✅  Ready to start working on ${getVariantDisplayName(variant)}`)
+  console.log(`✅  Pret à travailler sur ${getVariantDisplayName(variant)}`)
 }
 
 go()
