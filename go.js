@@ -30,7 +30,7 @@ async function go() {
       type: 'list',
       choices: [
         {name: 'Changer d\'exercise', value: 'changeExercise'},
-        {name: 'Démmarrer les bonus', value: 'startExtraCredit'},
+        {name: 'Lister les bonus', value: 'startExtraCredit'},
       ],
     },
   ])
@@ -54,7 +54,7 @@ async function changeExercise() {
       type: 'list',
       default: currentBranch,
       choices: [
-        {name: 'Returner sur la branche main', value: 'main'},
+        {name: 'Retourner sur la branche main', value: 'main'},
         ...getExerciseBranches().map(b => ({
           name: getDisplayName(b),
           value: b,
@@ -101,22 +101,22 @@ async function startExtraCredit() {
     },
   ])
 
-  for (const {extras, exercise, final} of Object.values(variants)) {
-    const availableECs = extras.map(e => e.number).filter(n => n < variant)
-    const maxEC = Math.max(...availableECs)
-    const maxExtra = extras.find(e => e.number === maxEC)
+  // for (const {extras, exercise, final} of Object.values(variants)) {
+  //   const availableECs = extras.map(e => e.number).filter(n => n < variant)
+  //   const maxEC = Math.max(...availableECs)
+  //   const maxExtra = extras.find(e => e.number === maxEC)
 
-    if (variant === 'final' || (!maxExtra && !final)) {
-      // reset the exercise to the original state
-      spawnSync(`git checkout -- ${exercise.file}`)
-    } else {
-      const newExerciseContents = fs.readFileSync((maxExtra || final).file, {
-        encoding: 'utf-8',
-      })
-      fs.writeFileSync(exercise.file, newExerciseContents)
-    }
-  }
-  console.log(`✅  Pret à travailler sur ${getVariantDisplayName(variant)}`)
+  //   if (variant === 'final' || (!maxExtra && !final)) {
+  //     // reset the exercise to the original state
+  //     spawnSync(`git checkout -- ${exercise.file}`)
+  //   } else {
+  //     const newExerciseContents = fs.readFileSync((maxExtra || final).file, {
+  //       encoding: 'utf-8',
+  //     })
+  //     fs.writeFileSync(exercise.file, newExerciseContents)
+  //   }
+  // }
+  // console.log(`✅  Pret à travailler sur ${getVariantDisplayName(variant)}`)
 }
 
 go()
