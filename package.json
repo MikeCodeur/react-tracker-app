@@ -42,8 +42,7 @@
     "init": "node install",
     "lint": "eslint . --cache-location node_modules/.cache/eslint",
     "format": "prettier --write \"**/*.+(js|json|css|md|mdx|html)\"",
-    "validate-exercises": "node ./scripts/validate-exercises",
-    "validate": "npm run validate-exercises && npm-run-all --parallel lint test:coverage && node ./scripts/build"
+    "validate": "npm-run-all --parallel lint test:coverage && node ./scripts/build"
   },
   "eslintConfig": {
     "extends": [
