@@ -14,20 +14,24 @@
 } 
 */
 
-/* 🐶 Cible <thead> et applique les proprité suivante 
+/* 🐶 Cible <thead> et applique les propriétés suivante 
   font-weight: bold;
   font-size: 1.2em;
   text-align: left;
   color: #ffffff;
 */
 
-/* 🐶 Cible <td> et th et applique les proprité suivante 
+/* 🐶 Cible <td> et applique les propriétés suivante 
+  font-size: 1em;
+*/
+
+/* 🐶 Cible <td> et th et applique les propriétés suivante 
   padding-bottom: 2%;
   padding-top: 2%;
   padding-left: 2%;
 */
 
-/* 🐶 Cible <tr> et applique les proprité suivante
+/* 🐶 Cible <tr> et applique les propriétés suivante
  background-color: #323c50;
  uniquement sur les lignes impaires
  et 
@@ -37,16 +41,24 @@
   📑 even odd rules : https://www.w3.org/Style/Examples/007/evenodd.en.html
  */
 
-/* 🐶 Cible <th>  et applique les proprité suivante 
+/* 🐶 Cible <th>  et applique les propriétés suivante 
    background-color: #1f2739;
+   pour afficher cette couleur dans les colonnes d'en-tête du tableau
 */
 
-/* 🐶 Cible <thead> <tr> et <th> et applique les proprité suivante 
+/* 🐶 Cible <td>  et applique les propriétés suivante 
+   color: #ffffffa1;
+   uniquement sur le premier element 
+   pour afficher la couleur du texte uniquement sur la premier colonne
+*/
+
+/* 🐶 Cible <th> et applique les propriétés suivante 
    color: #d10606a1;
    uniquement sur les ligne impaires
+   pour afficher en rouge le texte dans l'en-tête du tableau 
 */
 
-/* 🐶 Cible le survole d'une ligne du tableau
+/* 🐶 Cible le survole d'une ligne du tableau avec 'hover'
    background-color: #464a52;
    box-shadow: 0 6px 6px -6px #0e1119;
 */
@@ -71,4 +83,3 @@
   bbackground-color: #ee5f0c;
   box-shadow: 0 6px 6px -6px #0e1119;
 */
-

@@ -20,9 +20,9 @@ const TrackersTable = ({trackers}) => {
           </thead>
           <tbody>
             {trackers.map(tracker => (
-              // 🐶 Ajoute le ClassName 'selectedline' sur <tr> ci dessous 
+              // 🐶 Ajoute le ClassName 'selectedline' sur <tr> ci dessous
               // Cela nous permettra plus tard d'y appliquer un style sur une ligne
-              // selectionné du tanleau
+              // selectionné du tableau
               <tr>
                 <td>{tracker.name}</td>
                 <td>{tracker.starttime}</td>
