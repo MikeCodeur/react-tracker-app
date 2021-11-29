@@ -34,21 +34,18 @@ const TrackersTable = ({trackers}) => {
   // 🤖 const trackersParCategory = groupBy(trackers, 'category')
 
   Object.keys(trackersParCategory).forEach(category => {
-    trackersParCategory[category].forEach((tracker) => {
+    trackersParCategory[category].forEach(tracker => {
       // 🐶 La première fois on ajoute dans 'rows' ligne catégorie 🤖 `rows.push(<TrackerCategory`
       // pour savoir si c'est la première fois que l'on rencontre une catégorie, on se base dur 'lastCategory'
       // 🤖 if (tracker.category !== lastCategory) {
-      
       // 🐶 ajoute le tracker dans rows 🤖 `rows.push(<TrackerRow`
       // n'oublie pas les key sur les composants
-
-      // 🐶 met à jour la variable 'lastCategory' avec  'tracker.category' pour que l'on ajoute 
+      // 🐶 met à jour la variable 'lastCategory' avec  'tracker.category' pour que l'on ajoute
       // pas une deuxieme ligne <TrackerCategory> pour rien
-
     })
   })
   return (
-    <> 
+    <>
       <h2>Liste des trackers</h2>
       <div className="TableContainer">
         <table>
@@ -61,7 +58,7 @@ const TrackersTable = ({trackers}) => {
             </tr>
           </thead>
           <tbody>
-          {/* ⛏️ supprime le `trackers.map...` et remplace par {rows}   */}
+            {/* ⛏️ supprime le `trackers.map...` et remplace par {rows}   */}
             {trackers.map(tracker => (
               <TrackerRow tracker={tracker} />
             ))}
