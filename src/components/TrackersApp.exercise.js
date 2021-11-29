@@ -1,5 +1,5 @@
 import * as React from 'react'
-// 🐶 importe notre "base de données" de trackers 
+// 🐶 importe notre "base de données" de trackers
 // 🤖 import db from '../data'
 
 // 🐶 créé les 3 states necessaires au composant 'TrackersApp'
