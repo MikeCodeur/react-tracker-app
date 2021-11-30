@@ -19,7 +19,7 @@ import {getDateTimeForPicker} from '../helper'
 const TrackerEditForm = ({}) => {
   // 🐶 créé un state 'tracker' initialisé avec 'selectedTracker'
 
-  // 🐶 les 4 fonctions qui suivent sont appeler sur un changement de valeur dans le formulaire
+  // 🐶 les 4 fonctions qui suivent sont appelé sur un changement de valeur dans le formulaire
   // met à jour le state 'tracker' avec les nouvelle valeur du formulaire
   const handleTrackerName = e => {}
   const handleTrackerStartTime = e => {}
@@ -43,9 +43,9 @@ const TrackerEditForm = ({}) => {
   // conditionne la mise à jour du tracker si les ids sont differents et non vide
   // 🤖 selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id
 
-  // 🐶 On veut maintenant activer / desactiver les boutons / Champs input en fonction 
+  // 🐶 On veut maintenant activer / desactiver les boutons / Champs input en fonction
   // de l'état du tracker (pas de tracker à editer / tracker à editer )
-  // on se base sur l'id 
+  // on se base sur l'id
   // 🤖 créée const disabled
   // si id vide 'disabled' est à true, false sinon
   // met `disabled={disabled}` sur tous les champs <input< et <button> (sauf le boutton 'Nouveau Tracker')

@@ -35,7 +35,8 @@ const TrackerEditForm = ({
     if (selectedTracker?.id !== '' && selectedTracker?.id !== tracker.id) {
       setTracker(selectedTracker)
     }
-  }, [tracker, selectedTracker])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTracker])
 
   const handleOnSubmit = e => {
     e.preventDefault()
@@ -94,7 +95,11 @@ const TrackerEditForm = ({
 
           <label>
             Categorie:
-            <select disabled={disabled} value={tracker.category} onChange={handleTrackerCategory}>
+            <select
+              disabled={disabled}
+              value={tracker.category}
+              onChange={handleTrackerCategory}
+            >
               <option value="Sport">Sport</option>
               <option value="Code">Code</option>
               <option value="Perso">Perso</option>

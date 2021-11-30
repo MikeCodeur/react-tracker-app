@@ -39,7 +39,7 @@ function TrackersApp() {
   }
   const handleDeleteTracker = tracker => {
     if (tracker.id === '') {
-      alert('il manque le tracker id')
+      alert('veuillez selectionner un tracker')
       return
     }
     setAllTrackers(allTrackers.filter(item => item.id !== tracker.id))

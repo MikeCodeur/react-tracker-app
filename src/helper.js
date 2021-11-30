@@ -2,7 +2,7 @@
  * groupe en fonction d'une proprieté par
  * exemple si on veut grouper par category
  * groupBy(array,'category')
- * 
+ *
  * [{name: "mike", category:"sport"},
  * {name: "mike", category:"sport"},
  * {name: "mike", category:"perso"}]
@@ -11,73 +11,74 @@
  *  'sport':[...],
  *  'perso':[...]
  * }
- * @param {*} tableauObjets 
- * @param {*} propriete 
- * @returns 
+ * @param {*} tableauObjets
+ * @param {*} propriete
+ * @returns
  */
 export function groupBy(tableauObjets, propriete) {
   return tableauObjets.reduce(function (acc, obj) {
-    var cle = obj[propriete];
+    var cle = obj[propriete]
     if (!acc[cle]) {
-      acc[cle] = [];
+      acc[cle] = []
     }
-    acc[cle].push(obj);
-    return acc;
-  }, {});
+    acc[cle].push(obj)
+    return acc
+  }, {})
 }
 
-
 export const diffTime = (start, end) => {
-
-  // objectif ! difference entre 2 dates : 
+  // objectif ! difference entre 2 dates :
   // avoir une chaine de caracteres qui affiche : Days : Heures : Minutes : secondes : Milliseconde
   // algo ! on faire faire la difference en ms : calculer les jours, sourstraire, les heures + sourstraires etc ...tracker
 
   //1 : date de depart et date de fin (date de fin peut etre undefined = now)
   //2 : calcul delta diff /1000 pour avoir en seconde
-  //3 : calcul nb days : delta/ 86400 : nombre de seconde / 86400 (seconde dans days) pour avoir le nombre de days 
+  //3 : calcul nb days : delta/ 86400 : nombre de seconde / 86400 (seconde dans days) pour avoir le nombre de days
   //4 : calcul nb heures  :delta / 3600 : nombre de seconde restante / 3600 polur avoir le nombre d'heures restante
-  //5 : calcul nb minutes  :delta / 60 : nombre de seconde restant / 60 pour avoir les minutes 
-  //6 : calcul nb sec  :delta / 60 : nombre de seconde restant / 60 pour avoir les minutes 
-  
-  start = new Date(start);
-  end = end ?  new Date(end): new Date();
-  
-  let durationStr = ""
-  
-  var delta = Math.abs(start - end) / 1000;
+  //5 : calcul nb minutes  :delta / 60 : nombre de seconde restant / 60 pour avoir les minutes
+  //6 : calcul nb sec  :delta / 60 : nombre de seconde restant / 60 pour avoir les minutes
+
+  start = new Date(start)
+  end = end ? new Date(end) : new Date()
+
+  let durationStr = ''
+
+  var delta = Math.abs(start - end) / 1000
 
   // calculate (and subtract) whole days
-  var days = Math.floor(delta / 86400);
-  delta -= days * 86400;
+  var days = Math.floor(delta / 86400)
+  delta -= days * 86400
 
   if (days > 0) {
-    durationStr = days + " j "
+    durationStr = days + ' j '
   }
   // calculate (and subtract) whole hours
-  var hours = Math.floor(delta / 3600) % 24;
-  delta -= hours * 3600;
+  var hours = Math.floor(delta / 3600) % 24
+  delta -= hours * 3600
 
   if (hours > 0) {
-    durationStr = durationStr + hours + " h "
+    durationStr = durationStr + hours + ' h '
   }
   // calculate (and subtract) whole minutes
-  var minutes = Math.floor(delta / 60) % 60;
-  delta -= minutes * 60;
+  var minutes = Math.floor(delta / 60) % 60
+  delta -= minutes * 60
   if (minutes > 0) {
-    durationStr = durationStr + minutes + " min "
+    durationStr = durationStr + minutes + ' min '
   }
   // what's left is seconds
   var seconds = Math.floor(delta % 60)
   if (seconds > 0) {
-    durationStr = durationStr + seconds + " sec "
+    durationStr = durationStr + seconds + ' sec '
   }
-
 
   return durationStr
 }
 
 export const getDateTimeForPicker = (date = new Date()) => {
-  const dateIso = date.toISOString();
-  return dateIso.substring(0, dateIso.length-5)
+  const dateIso = date.toISOString()
+  //https://fr.wikipedia.org/wiki/ISO_8601
+  //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
+  //2011-10-05T14:48:00.000Z
+  //2018-06-12T19:30
+  return dateIso.substring(0, dateIso.length - 5)
 }
