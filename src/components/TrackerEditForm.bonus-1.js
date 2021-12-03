@@ -64,14 +64,16 @@ const reducer = (state, action) => {
   }
 }
 
-function useEditTracker({defaultTracker}) {
+function useEditTracker(defaultTracker) {
   const [state, dispatch] = React.useReducer(reducer, {
     tracker: defaultTracker,
     error: null,
     status: 'idle',
+    activeInput: false,
     activeButtons: {btnSave: false, btnUp: false, btnDel: false},
   })
   const {tracker, error, status, activeButtons, activeInput} = state
+
   const setTracker = tracker => {
     dispatch({
       type: 'trackerChange',
@@ -129,6 +131,7 @@ const TrackerEditForm = ({
   onDeleteTracker,
   onUpdateTracker,
 }) => {
+  
   const {
     tracker,
     activeButtons,
@@ -161,7 +164,8 @@ const TrackerEditForm = ({
     if (selectedTracker?.id !== '') {
       editTracker(selectedTracker)
     }
-  }, [editTracker, selectedTracker])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTracker])
 
   const handleOnSubmit = e => {
     e.preventDefault()

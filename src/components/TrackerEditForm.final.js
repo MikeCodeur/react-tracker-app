@@ -82,6 +82,7 @@ const TrackerEditForm = ({
     tracker: selectedTracker,
     error: null,
     status: 'idle',
+    activeInput: false,
     activeButtons: {btnSave: false, btnUp: false, btnDel: false},
   })
 
