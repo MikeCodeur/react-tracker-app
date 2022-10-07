@@ -10,8 +10,8 @@ function TrackersApp() {
   return (
     <div>
       <h3>il y a {allTrackers.length} trackers </h3>
-      {allTrackers.map(tracker => (
-        <p>{tracker.name}</p>
+      {allTrackers.map((tracker, id) => (
+        <p key={id}>{tracker.name}</p>
       ))}
     </div>
   )
