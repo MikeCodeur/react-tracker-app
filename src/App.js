@@ -1,16 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+// eslint-disable-next-line no-unused-vars
+import logo from './logo.svg'
+import './App.css'
 import {TrackersApp} from './components/TrackersApp'
-
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <header className="App-header"></header>
       <TrackersApp />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
