@@ -15,8 +15,8 @@ const TrackersTable = ({trackers}) => {
             </tr>
           </thead>
           <tbody>
-            {trackers.map(tracker => (
-              <tr>
+            {trackers.map((tracker, idx) => (
+              <tr key={idx}>
                 <td>{tracker.name}</td>
                 <td>{tracker.starttime}</td>
                 <td>{tracker.endtime}</td>
