@@ -19,11 +19,11 @@ const TrackersTable = ({trackers}) => {
             </tr>
           </thead>
           <tbody>
-            {trackers.map(tracker => (
+            {trackers.map((tracker, idx) => (
               // 🐶 Ajoute le ClassName 'selectedline' sur <tr> ci dessous
               // Cela nous permettra plus tard d'y appliquer un style sur une ligne
               // selectionné du tableau
-              <tr>
+              <tr key={idx}>
                 <td>{tracker.name}</td>
                 <td>{tracker.starttime}</td>
                 <td>{tracker.endtime}</td>

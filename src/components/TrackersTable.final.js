@@ -3,7 +3,7 @@ import './Trackers.final.css'
 
 const TrackersTable = ({trackers}) => {
   return (
-    <> 
+    <>
       <h2>Liste des trackers</h2>
       <div className="TableContainer">
         <table>
@@ -16,8 +16,8 @@ const TrackersTable = ({trackers}) => {
             </tr>
           </thead>
           <tbody>
-            {trackers.map(tracker => (
-              <tr>
+            {trackers.map((tracker, idx) => (
+              <tr key={idx}>
                 <td>{tracker.name}</td>
                 <td>{tracker.starttime}</td>
                 <td>{tracker.endtime}</td>
